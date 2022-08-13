@@ -1,7 +1,10 @@
 package com.dasitera.springexchange.rest.controller;
 
+import com.dasitera.springexchange.infrastructure.entity.Exchange;
 import com.dasitera.springexchange.infrastructure.entity.Transaction;
+import com.dasitera.springexchange.rest.dto.ExchangeDto;
 import com.dasitera.springexchange.rest.dto.TransactionDto;
+import com.dasitera.springexchange.service.ConsultExchange;
 import com.dasitera.springexchange.service.ConsultTransaction;
 import com.dasitera.springexchange.service.CreateTransaction;
 import com.dasitera.springexchange.service.DeleteTransaction;
@@ -19,13 +22,16 @@ public class TransactionController {
     private final CreateTransaction createTransaction;
     private final ConsultTransaction consultTransaction;
     private final DeleteTransaction deleteTransaction;
+    private final ConsultExchange consultExchange;
 
     public TransactionController(CreateTransaction createTransaction,
                                  ConsultTransaction consultTransaction,
-                                 DeleteTransaction deleteTransaction) {
+                                 DeleteTransaction deleteTransaction,
+                                 ConsultExchange consultExchange) {
         this.createTransaction = createTransaction;
         this.consultTransaction = consultTransaction;
         this.deleteTransaction = deleteTransaction;
+        this.consultExchange = consultExchange;
     }
 
     @GetMapping
@@ -47,8 +53,14 @@ public class TransactionController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public TransactionDto create(@RequestBody TransactionDto request) {
-        return TransactionDto.fromEntity(createTransaction.execute(request.toEntity()));
+    public ResponseEntity<TransactionDto> create(@RequestBody TransactionDto request) {
+        Optional<Exchange> exchange = consultExchange.consultById(request.exchangeId);
+        if (exchange.isPresent()) {
+            request.exchangeDto = ExchangeDto.fromEntity(exchange.get());
+            return ResponseEntity.ok(TransactionDto.fromEntity(createTransaction.execute(request.toEntity())));
+        }
+
+        return ResponseEntity.badRequest().build();
 
     }
 
