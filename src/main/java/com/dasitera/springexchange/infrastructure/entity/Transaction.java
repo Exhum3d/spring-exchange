@@ -29,14 +29,17 @@ public class Transaction {
     @JoinColumn(name = "exchange_id", referencedColumnName = "id")
     private Exchange exchange;
 
-    /**
-     * Hook that is triggered before the constructor
-     */
-    @PrePersist
-    private void onStart() {
-        date = new Date();
+
+    public Transaction() {
     }
 
+    public Transaction(String firstName, String lastName, String email, double amount) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.amount = amount;
+        this.date = new Date();
+    }
 
     public int getId() {
         return id;

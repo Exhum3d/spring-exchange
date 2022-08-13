@@ -26,6 +26,16 @@ public class Exchange {
     @OneToOne(mappedBy = "exchange")
     private Transaction transaction;
 
+    public Exchange() {
+
+    }
+
+    public Exchange(CurrencyCode fromCurrency, CurrencyCode toCurrency, double rate) {
+        this.fromCurrency = fromCurrency;
+        this.toCurrency = toCurrency;
+        this.rate = rate;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
