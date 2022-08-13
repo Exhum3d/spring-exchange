@@ -21,9 +21,8 @@ public class CreateTransaction {
 
     public Transaction execute(Transaction transaction, int id) {
         Optional<Exchange> exchange = exchangeRepository.findById(id);
-        if (exchange.isPresent()) {
-            transaction.setExchange(exchange.get());
-        }
+        exchange.ifPresent(transaction::setExchange);
+
         return transactionRepository.save(transaction);
     }
 }

@@ -72,9 +72,9 @@ public class TransactionController {
         Optional<Transaction> transaction = consultTransaction.consultById(id);
 
         if (transaction.isPresent()) {
-            Transaction newTransaction =
-                    createTransaction.execute(updateTransactionDto
-                            .partialUpdateEntity(transaction.get()), transaction.get().getExchange().getId());
+            Transaction newTransaction = createTransaction.execute(
+                    updateTransactionDto.partialUpdateEntity(transaction.get()),
+                    transaction.get().getExchange().getId());
 
             return ResponseEntity.ok(TransactionDto.fromEntity(newTransaction));
         } else {
