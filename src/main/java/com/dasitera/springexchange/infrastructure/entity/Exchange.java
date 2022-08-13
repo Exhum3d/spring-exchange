@@ -67,4 +67,19 @@ public class Exchange {
                 ", rate=" + rate +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Exchange exchange = (Exchange) o;
+
+        return id == exchange.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
 }
