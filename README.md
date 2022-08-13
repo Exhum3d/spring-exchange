@@ -10,6 +10,8 @@ An exchange RESTful API built with Spring Boot
   ```GET - http://localhost:8080/rates```
 - show exchange rate by id:
   ```GET - http://localhost:8080/rates/{id}```
+- show exchange rate by query string(fromCurrency):
+  ```GET - http://localhost:8080/rates?fromCurrency={currency}```
 - add a new exchange rate:
   ```POST - http://localhost:8080/rates/```
 - update a specific exchange rate (partial update is working aswell):
