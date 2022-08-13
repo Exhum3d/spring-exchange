@@ -17,15 +17,15 @@ public class Transaction {
 
     private String email;
 
-    private CurrencyCode fromCurrency;
-
-    private CurrencyCode toCurrency;
-
     private double amount;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date date;
+
+    @OneToOne
+    @JoinColumn(name = "exchange_id", referencedColumnName = "id")
+    private Exchange exchange;
 
     @PrePersist
     private void onStart() {
@@ -64,22 +64,6 @@ public class Transaction {
         this.email = email;
     }
 
-    public CurrencyCode getFromCurrency() {
-        return fromCurrency;
-    }
-
-    public void setFromCurrency(CurrencyCode fromCurrency) {
-        this.fromCurrency = fromCurrency;
-    }
-
-    public CurrencyCode getToCurrency() {
-        return toCurrency;
-    }
-
-    public void setToCurrency(CurrencyCode toCurrency) {
-        this.toCurrency = toCurrency;
-    }
-
     public double getAmount() {
         return amount;
     }
@@ -94,5 +78,13 @@ public class Transaction {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Exchange getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(Exchange exchange) {
+        this.exchange = exchange;
     }
 }

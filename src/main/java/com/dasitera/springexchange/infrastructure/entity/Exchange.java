@@ -19,6 +19,9 @@ public class Exchange {
 
     private double rate;
 
+    @OneToOne(mappedBy = "exchange")
+    private Transaction transaction;
+
     public void setId(int id) {
         this.id = id;
     }

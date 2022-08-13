@@ -1,8 +1,11 @@
 package com.dasitera.springexchange.service;
 
+import com.dasitera.springexchange.infrastructure.entity.Exchange;
 import com.dasitera.springexchange.infrastructure.entity.Transaction;
 import com.dasitera.springexchange.infrastructure.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CreateTransaction {
