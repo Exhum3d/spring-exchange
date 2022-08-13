@@ -57,7 +57,7 @@ public class TransactionController {
         Optional<Exchange> exchange = consultExchange.consultById(request.exchangeId);
         if (exchange.isPresent()) {
             request.exchangeDto = ExchangeDto.fromEntity(exchange.get());
-            return ResponseEntity.ok(TransactionDto.fromEntity(createTransaction.execute(request.toEntity())));
+            return ResponseEntity.ok(TransactionDto.fromEntity(createTransaction.execute(request.toEntity(), request.exchangeId)));
         }
 
         return ResponseEntity.badRequest().build();
@@ -72,7 +72,10 @@ public class TransactionController {
         Optional<Transaction> transaction = consultTransaction.consultById(id);
 
         if (transaction.isPresent()) {
-            Transaction newTransaction = createTransaction.execute(updateTransactionDto.partialUpdateEntity(transaction.get()));
+            Transaction newTransaction =
+                    createTransaction.execute(updateTransactionDto
+                            .partialUpdateEntity(transaction.get()), transaction.get().getExchange().getId());
+
             return ResponseEntity.ok(TransactionDto.fromEntity(newTransaction));
         } else {
             return ResponseEntity.badRequest().build();
