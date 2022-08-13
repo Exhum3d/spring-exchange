@@ -19,8 +19,6 @@ An exchange RESTful API built with Spring Boot
 - delete a specific exchange rate:
   ```DELETE - http://localhost:8080/rates/{id}```
 
-## Endpoints
-
 ### Transaction Controller:
 
 - show all exchange rates:
