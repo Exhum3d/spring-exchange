@@ -1,10 +1,12 @@
 package com.dasitera.springexchange.infrastructure.entity;
 
-import com.dasitera.springexchange.infrastructure.constant.CurrencyCode;
-
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * The Transaction entity which is a one-to-one relationship
+ * with the Exchange entity
+ */
 @Entity
 public class Transaction {
     @Id
@@ -27,10 +29,14 @@ public class Transaction {
     @JoinColumn(name = "exchange_id", referencedColumnName = "id")
     private Exchange exchange;
 
+    /**
+     * Hook that is triggered before the constructor
+     */
     @PrePersist
     private void onStart() {
         date = new Date();
     }
+
 
     public int getId() {
         return id;
@@ -87,4 +93,19 @@ public class Transaction {
     public void setExchange(Exchange exchange) {
         this.exchange = exchange;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", amount=" + amount +
+                ", date=" + date +
+                ", exchange=" + exchange +
+                '}';
+    }
+
+
 }

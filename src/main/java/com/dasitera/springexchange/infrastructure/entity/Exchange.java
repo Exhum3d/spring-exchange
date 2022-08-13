@@ -4,6 +4,10 @@ import com.dasitera.springexchange.infrastructure.constant.CurrencyCode;
 
 import javax.persistence.*;
 
+/**
+ * The Exchange entity which is in a one-to-one relationship with
+ * the Transaction entity
+ */
 @Entity
 public class Exchange {
 
