@@ -4,21 +4,23 @@ import com.dasitera.springexchange.infrastructure.entity.Exchange;
 import com.dasitera.springexchange.infrastructure.entity.Transaction;
 import com.dasitera.springexchange.infrastructure.repository.ExchangeRepository;
 import com.dasitera.springexchange.infrastructure.repository.TransactionRepository;
+import com.dasitera.springexchange.service.interfaces.CreateTransaction;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class CreateTransaction {
+public class CreateTransactionImpl implements CreateTransaction {
     private TransactionRepository transactionRepository;
     private ExchangeRepository exchangeRepository;
 
-    public CreateTransaction(TransactionRepository transactionRepository,
-                             ExchangeRepository exchangeRepository) {
+    public CreateTransactionImpl(TransactionRepository transactionRepository,
+                                 ExchangeRepository exchangeRepository) {
         this.transactionRepository = transactionRepository;
         this.exchangeRepository = exchangeRepository;
     }
 
+    @Override
     public Transaction execute(Transaction transaction, int id) {
         Optional<Exchange> exchange = exchangeRepository.findById(id);
         exchange.ifPresent(transaction::setExchange);

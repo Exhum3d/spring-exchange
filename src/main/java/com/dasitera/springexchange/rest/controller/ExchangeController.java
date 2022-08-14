@@ -3,8 +3,8 @@ package com.dasitera.springexchange.rest.controller;
 import com.dasitera.springexchange.infrastructure.constant.CurrencyCode;
 import com.dasitera.springexchange.infrastructure.entity.Exchange;
 import com.dasitera.springexchange.rest.dto.ExchangeDto;
-import com.dasitera.springexchange.service.ConsultExchange;
-import com.dasitera.springexchange.service.CreateExchange;
+import com.dasitera.springexchange.service.interfaces.ConsultExchange;
+import com.dasitera.springexchange.service.interfaces.CreateExchange;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +18,7 @@ import java.util.stream.Collectors;
 public class ExchangeController {
 
     private final CreateExchange createExchange;
-
     private final ConsultExchange consultExchange;
-
 
     public ExchangeController(CreateExchange createExchange,
                               ConsultExchange consultExchange
