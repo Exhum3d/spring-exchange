@@ -14,6 +14,8 @@ public class DeleteTransactionImpl implements DeleteTransaction {
 
     @Override
     public void execute(int id) {
+
         transactionRepository.deleteById(id);
     }
+
 }

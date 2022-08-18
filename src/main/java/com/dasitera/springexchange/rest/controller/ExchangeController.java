@@ -83,11 +83,11 @@ public class ExchangeController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<ExchangeDto> deleteTransaction(@PathVariable("id") int id) {
-        Optional<Exchange> transaction = consultExchange.consultById(id);
+        Optional<Exchange> exchange = consultExchange.consultById(id);
 
-        if (transaction.isPresent()) {
+        if (exchange.isPresent()) {
             deleteExchange.execute(id);
-            return ResponseEntity.ok(ExchangeDto.fromEntity(transaction.get()));
+            return ResponseEntity.ok(ExchangeDto.fromEntity(exchange.get()));
         } else {
             return ResponseEntity.notFound().build();
         }
