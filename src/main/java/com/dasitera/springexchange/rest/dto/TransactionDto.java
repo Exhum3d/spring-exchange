@@ -1,14 +1,10 @@
 package com.dasitera.springexchange.rest.dto;
 
-import com.dasitera.springexchange.infrastructure.constant.CurrencyCode;
-import com.dasitera.springexchange.infrastructure.entity.Exchange;
 import com.dasitera.springexchange.infrastructure.entity.Transaction;
 import com.dasitera.springexchange.infrastructure.repository.ExchangeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
-import java.util.Optional;
 
 public class TransactionDto {
 
@@ -75,6 +71,4 @@ public class TransactionDto {
         return transaction;
 
     }
-
-
 }
