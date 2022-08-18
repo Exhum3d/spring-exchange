@@ -3,7 +3,7 @@ package com.dasitera.springexchange.rest.controller;
 import com.dasitera.springexchange.infrastructure.constant.CurrencyCode;
 import com.dasitera.springexchange.infrastructure.entity.Exchange;
 import com.dasitera.springexchange.rest.dto.ExchangeDto;
-import com.dasitera.springexchange.service.DeleteExchange;
+import com.dasitera.springexchange.service.interfaces.DeleteExchange;
 import com.dasitera.springexchange.service.interfaces.ConsultExchange;
 import com.dasitera.springexchange.service.interfaces.CreateExchange;
 import org.springframework.http.MediaType;

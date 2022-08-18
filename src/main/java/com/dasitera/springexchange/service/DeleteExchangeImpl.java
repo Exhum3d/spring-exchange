@@ -1,6 +1,7 @@
 package com.dasitera.springexchange.service;
 
 import com.dasitera.springexchange.infrastructure.repository.ExchangeRepository;
+import com.dasitera.springexchange.service.interfaces.DeleteExchange;
 import org.springframework.stereotype.Service;
 
 @Service
