@@ -23,7 +23,10 @@ public class Exchange {
 
     private double rate;
 
-    @OneToOne(mappedBy = "exchange")
+    /**
+     * Added cascade on delete when an exchange rate is removed
+     */
+    @OneToOne(mappedBy = "exchange", cascade = CascadeType.REMOVE)
     private Transaction transaction;
 
     public Exchange() {
