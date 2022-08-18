@@ -3,6 +3,7 @@ package com.dasitera.springexchange.rest.controller;
 import com.dasitera.springexchange.infrastructure.constant.CurrencyCode;
 import com.dasitera.springexchange.infrastructure.entity.Exchange;
 import com.dasitera.springexchange.rest.dto.ExchangeDto;
+import com.dasitera.springexchange.service.DeleteExchange;
 import com.dasitera.springexchange.service.interfaces.ConsultExchange;
 import com.dasitera.springexchange.service.interfaces.CreateExchange;
 import org.springframework.http.MediaType;
@@ -19,12 +20,15 @@ public class ExchangeController {
 
     private final CreateExchange createExchange;
     private final ConsultExchange consultExchange;
+    private final DeleteExchange deleteExchange;
 
     public ExchangeController(CreateExchange createExchange,
-                              ConsultExchange consultExchange
+                              ConsultExchange consultExchange,
+                              DeleteExchange deleteExchange
     ) {
         this.createExchange = createExchange;
         this.consultExchange = consultExchange;
+        this.deleteExchange = deleteExchange;
     }
 
     @GetMapping
@@ -74,6 +78,18 @@ public class ExchangeController {
             return ResponseEntity.ok(ExchangeDto.fromEntity(newExchange));
         } else {
             return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<ExchangeDto> deleteTransaction(@PathVariable("id") int id) {
+        Optional<Exchange> transaction = consultExchange.consultById(id);
+
+        if (transaction.isPresent()) {
+            deleteExchange.execute(id);
+            return ResponseEntity.ok(ExchangeDto.fromEntity(transaction.get()));
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }
